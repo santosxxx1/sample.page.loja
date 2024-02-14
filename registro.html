@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Registro</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(19, 19, 19, 0.9);
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 18px;
+            border-radius: 10px 10px 0 0;
+            transition: background 0.3s ease;
+        }
+
+        .tab:hover {
+            background: #00ccff;
+        }
+
+        .active-tab {
+            background: #00c8fa;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .active-tab-content {
+            display: block;
+        }
+
+        h1 {
+            color: #00ffdd;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ffbc03;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #e67e22, #f39c12);
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+
+        .forgot-password,
+        .register-link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login e Registro</h1>
+        <div class="tabs">
+            <button class="tab active-tab" onclick="toggleTab('login')">Login</button>
+            <button class="tab" onclick="toggleTab('register')">Registrar-se</button>
+        </div>
+
+        <div class="tab-content login active-tab-content">
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Nome de usuário" required>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="button" onclick="performLogin()">Entrar</button>
+            </form>
+            <p class="forgot-password">
+                <a href="esqueceu.html">Esqueceu a Senha?</a>
+            </p>
+        </div>
+
+        <div class="tab-content register">
+            <form id="registerForm">
+                <input type="text" id="newUsername" placeholder="Novo Nome de usuário" required>
+                <input type="password" id="newPassword" placeholder="Nova Senha" required>
+                <button type="button" onclick="performRegister()">Registrar-se</button>
+            </form>
+            <p class="register-link">
+                Já possui uma conta? <a href="login.html">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active-tab'));
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active-tab-content'));
+
+            document.querySelector(`.${tab}`).classList.add('active-tab-content');
+            document.querySelector(`.${tab}-tab`).classList.add('active-tab');
+        }
+
+        function performLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            alert(`Usuário logado:\nNome de usuário: ${username}\nSenha: ${password}`);
+        }
+
+        function performRegister() {
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+            alert(`Usuário registrado:\nNome de usuário: ${newUsername}\nSenha: ${newPassword}`);
+        }
+    </script>
+</body>
+</html>

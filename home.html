@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .product {
+            width: 45%;
+            margin-bottom: 20px;
+            text-align: left;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .product-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .product h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: #e44d26;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-add-to-cart {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+            color: #fff;
+            text-decoration: none;
+            box-sizing: border-box; /* Garante que o padding não afete o tamanho total */
+        }
+
+        .btn-add-to-cart-green {
+            background-color: #4CAF50;
+        }
+
+        .btn-add-to-cart-green:hover {
+            background-color: #45a049;
+        }
+
+        .btn-add-to-cart-blue {
+            background-color: #3498db;
+        }
+
+        .btn-add-to-cart-blue:hover {
+            background-color: #2980b9;
+        }
+
+        /* Botão de Login */
+        .btn-login {
+            background-color: #e44d26;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn-login:hover {
+            background-color: #d04024;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="login.html" class="btn-login">Login</a>
+
+        <img src="caminho/para/seu/logo.png" alt="Logo da Minha Loja" class="logo">
+
+        <div class="products-container">
+            <div class="product">
+                <img src="https://i.ebayimg.com/images/g/DHIAAOSwordidJk7/s-l500.png" alt="Nome do Produto 1" class="product-image">
+                <h2>N1TRO GAMING 3MONTH</h2>
+                <p>3 MONTH THE NITRO GAMING</p>
+                <p class="product-price">Preço: R$ 99,99</p>
+                <a href="carrinho.html" class="btn-add-to-cart btn-add-to-cart-green">Adicionar ao Carrinho</a>
+            </div>
+
+            <div class="product">
+                <img src="https://i.ebayimg.com/images/g/DHIAAOSwordidJk7/s-l500.png" alt="Nome do Produto 2" class="product-image">
+                <h2>N1TRO 12MONTH</h2>
+                <p>1MONTH NITRO GAMING</p>
+                <p class="product-price">Preço: R$ 99,99</p>
+                <a href="carrinho.html" class="btn-add-to-cart btn-add-to-cart-blue">Adicionar ao Carrinho</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

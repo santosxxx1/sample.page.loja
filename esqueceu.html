@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de Senha</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #9b59b6, #3498db);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recuperação de Senha</h1>
+        <form id="recoveryForm">
+            <input type="email" id="email" placeholder="Seu E-mail" required>
+            <button type="button" onclick="submitForm()">Recuperar Senha</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            const email = document.getElementById('igorsml132@gmail.com').value;
+
+            // Envie o email para o backend para processamento
+            // Você precisará implementar esta lógica no backend.
+
+            // Aqui, estou apenas exibindo uma mensagem para fins de exemplo.
+            alert(`Um e-mail de recuperação foi enviado para ${email}`);
+        }
+    </script>
+</body>
+</html>

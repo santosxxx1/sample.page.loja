@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            color: #495057;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #e44d26;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .product {
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            padding: 15px;
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            text-align: left;
+            position: relative;
+        }
+
+        .product input[type="checkbox"] {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        label {
+            cursor: pointer;
+            display: inline-block;
+            background-color: #e44d26;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #e44d26, #f16529);
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #f16529, #e44d26);
+        }
+
+        #checkoutButton {
+            margin-top: 20px;
+        }
+
+        #cartIcon {
+            display: inline-block;
+            font-size: 40px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        #cartContainer {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #cartBadge {
+            background-color: #e44d26;
+            color: #fff;
+            border-radius: 50%;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #modalContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #qrCodeModal {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="cartContainer">
+            <span id="cartIcon">🛒</span>
+            <span id="cartBadge">0</span>
+        </div>
+        <h1>Carrinho de Compras</h1>
+        
+        <div class="product" id="product1">
+            <h2>Produto 1</h2>
+            <p>Descrição do Produto 1</p>
+            <input type="checkbox" id="addProduct1" class="productCheckbox">
+            <label for="addProduct1">Adicionar ao Carrinho</label>
+        </div>
+
+        <div class="product" id="product2">
+            <h2>Produto 2</h2>
+            <p>Descrição do Produto 2</p>
+            <input type="checkbox" id="addProduct2" class="productCheckbox">
+            <label for="addProduct2">Adicionar ao Carrinho</label>
+        </div>
+
+        <button onclick="checkout()" id="checkoutButton" style="display: none;">Finalizar Compra</button>
+    </div>
+
+    <div id="modalContainer">
+        <div id="qrCodeModal"></div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        document.addEventListener('change', function(event) {
+            if (event.target.classList.contains('productCheckbox')) {
+                const productId = event.target.parentElement.id;
+                const productName = document.querySelector(`#${productId} h2`).textContent;
+
+                if (event.target.checked) {
+                    addToCart(productName);
+                } else {
+                    removeFromCart(productName);
+                }
+            }
+        });
+
+        function addToCart(productName) {
+            cart.push(productName);
+            updateCheckoutButton();
+            updateCartBadge();
+        }
+
+        function removeFromCart(productName) {
+            cart = cart.filter(item => item !== productName);
+            updateCheckoutButton();
+            updateCartBadge();
+        }
+
+        function updateCheckoutButton() {
+            const checkoutButton = document.getElementById('checkoutButton');
+            if (cart.length > 0) {
+                checkoutButton.style.display = 'block';
+            } else {
+                checkoutButton.style.display = 'none';
+            }
+        }
+
+        function updateCartBadge() {
+            const cartBadge = document.getElementById('cartBadge');
+            cartBadge.textContent = cart.length;
+        }
+
+        function checkout() {
+            if (cart.length > 0) {
+                const paymentData = generatePaymentData(cart);
+                displayQrCode(paymentData);
+            } else {
+                alert('Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.');
+            }
+        }
+
+        function generatePaymentData(cart) {
+            // Aqui você geraria os dados de pagamento (PIX) no lado do servidor.
+            // Neste exemplo, apenas concateno os itens do carrinho.
+            return cart.join(', ');
+        }
+
+        function displayQrCode(paymentData) {
+            const modalContainer = document.getElementById('modalContainer');
+            modalContainer.style.display = 'flex';
+
+            const qrCodeModal = document.getElementById('qrCodeModal');
+            qrCodeModal.innerHTML = ''; // Limpa o conteúdo anterior
+
+            const qrCode = new QRCode(qrCodeModal, {
+                text: paymentData,
+                width: 300,
+                height: 300
+            });
+        }
+    </script>
+</body>
+</html>
